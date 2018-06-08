@@ -13,6 +13,14 @@ struct CardEditorViewModel {
   /*
    necesio guardar un texto
   */
+  var shadowIsOn = Variable<Bool>(true)
+  var shadowIsOnObservable: Observable<Bool> {
+    return shadowIsOn.asObservable()
+  }
+  var introducedRadius = Variable<CGFloat>(10)
+  var introducedRadiusObservable: Observable<CGFloat> {
+    return introducedRadius.asObservable()
+  }
   var introducedSring = Variable<String>("")
   var introducedStringObservable: Observable<String> {
     return introducedSring.asObservable()

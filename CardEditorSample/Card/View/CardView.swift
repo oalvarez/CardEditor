@@ -11,6 +11,8 @@ import RxSwift
 
 class CardView: UIView {
 
+  let bag = DisposeBag()
+  var viewModel: CardViewModel!
   //CardPresentable Properties
   @IBOutlet weak var backView: UIView!
   
@@ -37,20 +39,9 @@ class CardView: UIView {
 
 extension CardView {
   func configureCard(with viewModel: CardViewModel) {
+    self.viewModel = viewModel
     
-    coverImage.cornerRadius = viewModel.card.radius
-    backView.cornerRadius = viewModel.card.radius
-    withShadow = viewModel.card.shadow
-    
-    title.text = viewModel.cardInfo.title
-    year.text = viewModel.cardInfo.year
-    subtitle.text = viewModel.cardInfo.subtitle
-    noteOverDescription.text = viewModel.cardInfo.overDescription
-    about.text = viewModel.cardInfo.about
-    
-    coverImage.image = UIImage(named: viewModel.cardInfo.coverImageName!)
-    iconImage.image = UIImage(named: viewModel.cardInfo.iconImageName!)
-    
+    configureObservables()
     configureFontStyle()
   }
   
@@ -63,4 +54,29 @@ extension CardView {
   }
 }
 
+extension CardView {
+  func configureObservables() {
+    viewModel.cardInfoObservable
+      .subscribe(onNext: { cardInfo in
+        print("Card Info: \(cardInfo)")
+        self.title.text = cardInfo.title
+        self.year.text = cardInfo.year
+        self.subtitle.text = cardInfo.subtitle
+        self.noteOverDescription.text = cardInfo.overDescription
+        self.about.text = cardInfo.about
+        
+        self.coverImage.image = UIImage(named: cardInfo.coverImageName!)
+        self.iconImage.image = UIImage(named: cardInfo.iconImageName!)
+      })
+    .disposed(by: bag)
+    
+    viewModel.cardObservable
+      .subscribe(onNext: { card in
+        self.coverImage.cornerRadius = card.radius
+        self.backView.cornerRadius = card.radius
+        self.withShadow = card.shadow
+      })
+    .disposed(by: bag)
+  }
+}
 extension CardView : CardPresentable { }

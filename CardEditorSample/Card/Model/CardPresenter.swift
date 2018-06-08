@@ -9,7 +9,7 @@
 import CoreGraphics
 
 protocol CardPresenter {
-  var radius: CGFloat { get }
-  var shadow: Bool { get }
-  var size: CGSize { get }
+  var radius: CGFloat { get set }
+  var shadow: Bool { get set }
+  var size: CGSize { get set }
 }

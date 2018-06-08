@@ -12,6 +12,8 @@ import RxCocoa
 
 class ViewController: UIViewController {
 
+  @IBOutlet weak var slider: UISlider!
+  @IBOutlet weak var shadowSwitch: UISwitch!
   @IBOutlet weak var textField: UITextField!
   @IBOutlet weak var cardView: CardView!
   let bag = DisposeBag()
@@ -21,9 +23,10 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let cardViewModel = CardViewModel(card: CardModel(), cardInfo: CoverInfoModel())
+    let cardViewModel = CardViewModel(with: CardModel(), cardInfo: CoverInfoModel())
     
     cardView.configureCard(with: cardViewModel)
+    textField.text = cardView.viewModel.title
     configureObservables()
     // Do any additional setup after loading the view, typically from a nib.
   }
@@ -36,11 +39,36 @@ class ViewController: UIViewController {
     .bind(to: viewModel.introducedSring)
     .disposed(by: bag)
     
+    slider.rx
+    .value
+    .map { CGFloat($0)}
+    .bind(to: viewModel.introducedRadius)
+    .disposed(by: bag)
+    
+    shadowSwitch.rx
+    .isOn
+    .bind(to: viewModel.shadowIsOn)
+    .disposed(by: bag)
+    
     viewModel.introducedStringObservable
       .subscribe(onNext: {
-        self.cardView.title.text = $0
+        self.cardView.viewModel.updateTitle(with: $0)
     })
     .disposed(by: bag)
+    
+    viewModel.introducedRadiusObservable
+      .subscribe(onNext: {
+        print($0)
+        self.cardView.viewModel.upateCornerRadius(with: $0)
+      })
+      .disposed(by: bag)
+    
+    viewModel.shadowIsOnObservable
+      .subscribe(onNext: {
+        self.cardView.viewModel.upateShadow(with: $0)
+      })
+    .disposed(by: bag)
+    
   }
 
 
