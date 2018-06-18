@@ -52,13 +52,18 @@ class ViewController: UIViewController {
     
     viewModel.introducedStringObservable
       .subscribe(onNext: {
-        self.cardView.viewModel.updateTitle(with: $0)
+        self.cardView.viewModel.updateActiveLabel(with: $0)
     })
     .disposed(by: bag)
     
+    cardView.viewModel.selectedElementTagObservable
+      .subscribe(onNext: {
+        self.textField.text = self.cardView.viewModel.string(from: $0)
+      })
+      .disposed(by: bag)
+    
     viewModel.introducedRadiusObservable
       .subscribe(onNext: {
-        print($0)
         self.cardView.viewModel.upateCornerRadius(with: $0)
       })
       .disposed(by: bag)
@@ -70,7 +75,5 @@ class ViewController: UIViewController {
     .disposed(by: bag)
     
   }
-
-
 }
 

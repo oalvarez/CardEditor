@@ -11,6 +11,12 @@ import RxSwift
 
 class CardView: UIView {
 
+  @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
+    guard let label = sender.view as? UILabel,
+          let element = CardElement(rawValue: label.tag) else { return }
+    viewModel.selectedElementTag.value = element
+  }
+  
   let bag = DisposeBag()
   var viewModel: CardViewModel!
   //CardPresentable Properties
@@ -58,7 +64,6 @@ extension CardView {
   func configureObservables() {
     viewModel.cardInfoObservable
       .subscribe(onNext: { cardInfo in
-        print("Card Info: \(cardInfo)")
         self.title.text = cardInfo.title
         self.year.text = cardInfo.year
         self.subtitle.text = cardInfo.subtitle
