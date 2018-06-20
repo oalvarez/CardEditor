@@ -10,12 +10,6 @@ import UIKit
 import RxSwift
 
 class CardView: UIView {
-
-  @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
-    guard let label = sender.view as? UILabel,
-          let element = CardElement(rawValue: label.tag) else { return }
-    viewModel.selectedElementTag.value = element
-  }
   
   let bag = DisposeBag()
   var viewModel: CardViewModel!
@@ -44,9 +38,65 @@ class CardView: UIView {
 }
 
 extension CardView {
+  var views: [UIView] {
+    return [
+      title,
+      year,
+      subtitle,
+      noteOverDescription,
+      about
+    ]
+  }
+  
+  func addTapGestureForEdition() {
+    let cardTap = UITapGestureRecognizer(target: self, action: #selector(tapCard))
+    self.addGestureRecognizer(cardTap)
+    
+    views.forEach {
+      let tap = UITapGestureRecognizer(target: self, action: #selector(tapView))
+      $0.addGestureRecognizer(tap)
+    }
+  }
+  
+  @objc func tapView(_ sender: UITapGestureRecognizer) {
+    views.forEach {
+      if let label = $0 as? UILabel {
+        label.text = label.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        label.textColor = .white
+      }
+      $0.borderWith = 0
+      $0.borderColor = .clear
+    }
+    guard let label = sender.view as? UILabel,
+      let element = CardElement(rawValue: label.tag) else { return }
+    label.textColor = .lightGray
+    viewModel.selectedElementTag.value = element
+  }
+  
+  @objc func tapCard(_ sender: UITapGestureRecognizer) {
+    views.forEach {
+      if let label = $0 as? UILabel{
+        label.textColor = .white
+        if label.text!.isEmpty {
+        label.text?.append(" ")
+        }
+      }
+      $0.borderWith = 1
+      $0.borderColor = UIColor.init(white: 1, alpha: 0.5)
+      $0.cornerRadius = 3
+    }
+  }
+}
+
+protocol Editable {
+  var views: [UIView] { get }
+}
+
+
+extension CardView {
   func configureCard(with viewModel: CardViewModel) {
     self.viewModel = viewModel
-    
+    addTapGestureForEdition()
     configureObservables()
     configureFontStyle()
   }
