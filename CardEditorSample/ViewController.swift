@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     let cardViewModel = CardViewModel(with: CardModel(), cardInfo: CoverInfoModel())
     
     cardView.configureCard(with: cardViewModel)
+    cardView.configureCardForEdition()
     textField.text = cardView.viewModel.title
     configureObservables()
     // Do any additional setup after loading the view, typically from a nib.

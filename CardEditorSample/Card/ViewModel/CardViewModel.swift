@@ -50,6 +50,12 @@ struct CardViewModel {
     }
   }
   
+  private var showFrames = Variable<Bool>(false)
+  func hideFrames() { showFrames.value = false }
+  func toggleShowFrames() { showFrames.value.toggle() }
+  var showFramesObservable: Observable<Bool> {
+    return showFrames.asObservable()
+  }
   //Update Active Element With para evitar duplicaciones de código
   //Y tener el active element seleccionado que yo quiera tener
   func updateTitle(with text: String) {

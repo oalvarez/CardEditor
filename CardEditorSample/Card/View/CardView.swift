@@ -59,46 +59,45 @@ extension CardView {
   }
   
   @objc func tapView(_ sender: UITapGestureRecognizer) {
-    views.forEach {
-      if let label = $0 as? UILabel {
-        label.text = label.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        label.textColor = .white
-      }
-      $0.borderWith = 0
-      $0.borderColor = .clear
-    }
+    viewModel.hideFrames()
     guard let label = sender.view as? UILabel,
       let element = CardElement(rawValue: label.tag) else { return }
     label.textColor = .lightGray
     viewModel.selectedElementTag.value = element
   }
-  
   @objc func tapCard(_ sender: UITapGestureRecognizer) {
+    viewModel.toggleShowFrames()
+  }
+  
+  func showFrames(_ show:Bool) {
     views.forEach {
       if let label = $0 as? UILabel{
         label.textColor = .white
         if label.text!.isEmpty {
-        label.text?.append(" ")
+          if show {
+            label.text?.append(" ")
+          } else {
+            label.text = label.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+          }
         }
       }
-      $0.borderWith = 1
-      $0.borderColor = UIColor.init(white: 1, alpha: 0.5)
+      $0.borderWith = show ? 1 : 0
+      $0.borderColor = show ? UIColor.init(white: 1, alpha: 0.5) : .clear
       $0.cornerRadius = 3
     }
   }
 }
 
-protocol Editable {
-  var views: [UIView] { get }
-}
-
-
+//MARK - Configuration of the Card
 extension CardView {
   func configureCard(with viewModel: CardViewModel) {
     self.viewModel = viewModel
-    addTapGestureForEdition()
     configureObservables()
     configureFontStyle()
+  }
+  
+  func configureCardForEdition() {
+    addTapGestureForEdition()
   }
   
   func configureFontStyle() {
@@ -132,6 +131,12 @@ extension CardView {
         self.withShadow = card.shadow
       })
     .disposed(by: bag)
+    
+    viewModel.showFramesObservable
+      .subscribe(onNext: {
+        self.showFrames($0)
+      })
+      .disposed(by: bag)
   }
 }
 extension CardView : CardPresentable { }
