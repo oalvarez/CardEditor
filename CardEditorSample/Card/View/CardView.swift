@@ -13,46 +13,25 @@ class CardView: UIView {
   
   let bag = DisposeBag()
   var viewModel: CardViewModel!
-  //CardPresentable Properties
-  @IBOutlet weak var backView: UIView!
-  
-  //DataPresentableProperties
-  @IBOutlet weak var coverImage: UIImageView!
-  @IBOutlet weak var iconImage: UIImageView!
-  @IBOutlet weak var title: UILabel!
-  @IBOutlet weak var year: UILabel!
-  @IBOutlet weak var subtitle: UILabel!
-  @IBOutlet weak var noteOverDescription: UILabel!
-  
-  @IBOutlet weak var about: UILabel!
-  @IBOutlet var view: UIView!
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    view = Bundle.main.loadNibNamed("CardView", owner: self, options: nil)?[0] as? UIView
-    self.addSubview(view)
-    self.view.translatesAutoresizingMaskIntoConstraints = false;
-    self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options: [], metrics: nil, views: ["view": self.view]))
-    self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options: [], metrics: nil, views: ["view": self.view]))
-  }
+
+  var labels : [UILabel] { return [] }
+  var imageViews : [UIImageView] { return [] }
+  var fullCardViews : [UIView] { return [] }
 }
 
+protocol Card {
+  var labels: [UILabel] { get }
+}
+
+extension CardView: Card { }
+
 extension CardView {
-  var views: [UIView] {
-    return [
-      title,
-      year,
-      subtitle,
-      noteOverDescription,
-      about
-    ]
-  }
   
   func addTapGestureForEdition() {
     let cardTap = UITapGestureRecognizer(target: self, action: #selector(tapCard))
     self.addGestureRecognizer(cardTap)
     
-    views.forEach {
+    labels.forEach {
       let tap = UITapGestureRecognizer(target: self, action: #selector(tapView))
       $0.addGestureRecognizer(tap)
     }
@@ -61,7 +40,7 @@ extension CardView {
   @objc func tapView(_ sender: UITapGestureRecognizer) {
     viewModel.hideFrames()
     guard let label = sender.view as? UILabel,
-      let element = CardElement(rawValue: label.tag) else { return }
+      let element = labels.firstIndex(of: label) else { return }
     label.textColor = .lightGray
     viewModel.selectedElementTag.value = element
   }
@@ -70,20 +49,18 @@ extension CardView {
   }
   
   func showFrames(_ show:Bool) {
-    views.forEach {
-      if let label = $0 as? UILabel{
-        label.textColor = .white
-        if label.text!.isEmpty {
-          if show {
-            label.text?.append(" ")
-          } else {
-            label.text = label.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-          }
+    labels.forEach { label in
+      label.textColor = .white
+      if label.text!.isEmpty {
+        if show {
+          label.text?.append(" ")
+        } else {
+          label.text = label.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         }
       }
-      $0.borderWith = show ? 1 : 0
-      $0.borderColor = show ? UIColor.init(white: 1, alpha: 0.5) : .clear
-      $0.cornerRadius = 3
+      label.borderWith = show ? 1 : 0
+      label.borderColor = show ? UIColor.init(white: 1, alpha: 0.5) : .clear
+      label.cornerRadius = 3
     }
   }
 }
@@ -93,50 +70,42 @@ extension CardView {
   func configureCard(with viewModel: CardViewModel) {
     self.viewModel = viewModel
     configureObservables()
-    configureFontStyle()
   }
   
   func configureCardForEdition() {
     addTapGestureForEdition()
-  }
-  
-  func configureFontStyle() {
-    title.font = .titleFont
-    year.font = .yearFont
-    subtitle.font = .subtitleFont
-    noteOverDescription.font = .overAboutFont
-    about.font = .aboutFont
   }
 }
 
 extension CardView {
   func configureObservables() {
     viewModel.cardInfoObservable
-      .subscribe(onNext: { cardInfo in
-        self.title.text = cardInfo.title
-        self.year.text = cardInfo.year
-        self.subtitle.text = cardInfo.subtitle
-        self.noteOverDescription.text = cardInfo.overDescription
-        self.about.text = cardInfo.about
-        
-        self.coverImage.image = UIImage(named: cardInfo.coverImageName!)
-        self.iconImage.image = UIImage(named: cardInfo.iconImageName!)
+      .subscribe(onNext: { [weak self] cardInfo in
+        guard let strongSelf = self else { return }
+        for (label, text) in zip(strongSelf.labels, cardInfo.infoTexts) {
+          label.text = text
+        }
+        for (imageView, name) in zip(strongSelf.imageViews, cardInfo.imageNames) {
+          imageView.image = UIImage(named: name)
+        }
       })
     .disposed(by: bag)
     
     viewModel.cardObservable
-      .subscribe(onNext: { card in
-        self.coverImage.cornerRadius = card.radius
-        self.backView.cornerRadius = card.radius
-        self.withShadow = card.shadow
+      .subscribe(onNext: { [weak self] card in
+        guard let strongSelf = self else { return }
+        strongSelf.fullCardViews.forEach {
+          $0.cornerRadius = card.radius
+        }
+        strongSelf.withShadow = card.shadow
       })
     .disposed(by: bag)
     
     viewModel.showFramesObservable
-      .subscribe(onNext: {
-        self.showFrames($0)
+      .subscribe(onNext: { [weak self] in
+        guard let strongSelf = self else { return }
+        strongSelf.showFrames($0)
       })
       .disposed(by: bag)
   }
 }
-extension CardView : CardPresentable { }
