@@ -25,13 +25,14 @@ struct CardViewModel {
   }
   
   var title: String { return cardInfo.value.infoTexts.first ?? ""}
-  var selectedElementTag = Variable<Int>(0)
-  var selectedElementTagObservable: Observable<Int> {
-    return selectedElementTag.asObservable()
+  
+  var selectedElementIndex = Variable<Int?>(nil)
+  var selectedElementIndexObservable: Observable<Int?> {
+    return selectedElementIndex.asObservable()
   }
   
   func updateActiveLabel(with text: String) {
-    let index = selectedElementTag.value
+    guard let index = selectedElementIndex.value else { return }
     updateElement(at: index, with: text)
   }
   

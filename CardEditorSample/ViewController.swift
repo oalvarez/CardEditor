@@ -59,10 +59,15 @@ class ViewController: UIViewController {
     })
     .disposed(by: bag)
     
-    cardView.viewModel.selectedElementTagObservable
+    cardView.viewModel.selectedElementIndexObservable
       .subscribe(onNext: { [weak self] in
         guard let strongSelf = self else { return }
-        strongSelf.textField.text = strongSelf.cardView.viewModel.string(at: $0)
+        guard let index = $0 else {
+          strongSelf.textField.text = "No label selected"
+          return
+        }
+        let text = strongSelf.cardView.viewModel.string(at: index)
+        strongSelf.textField.text = text
       })
       .disposed(by: bag)
     
