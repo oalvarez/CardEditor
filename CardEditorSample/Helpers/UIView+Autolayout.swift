@@ -13,16 +13,16 @@ public extension UIView {
     guard let superview = superview else { return }
     translatesAutoresizingMaskIntoConstraints = false
     if let top = top {
-      topAnchor.constraint(equalTo: safely ? superview.safeAreaLayoutGuide.topAnchor : superview.topAnchor, constant: top).assign(priority)
+      topAnchor.constraint(equalTo: safely ? superview.safeAreaLayoutGuide.topAnchor : superview.topAnchor, constant: top).isActive = true
     }
     if let leading = leading {
-      leadingAnchor.constraint(equalTo: safely ? superview.safeAreaLayoutGuide.leadingAnchor : superview.leadingAnchor, constant: leading).assign(priority)
+      leadingAnchor.constraint(equalTo: safely ? superview.safeAreaLayoutGuide.leadingAnchor : superview.leadingAnchor, constant: leading).isActive = true
     }
     if let bottom = bottom {
-      bottomAnchor.constraint(equalTo: safely ? superview.safeAreaLayoutGuide.bottomAnchor : superview.bottomAnchor, constant: -bottom).assign(priority)
+      bottomAnchor.constraint(equalTo: safely ? superview.safeAreaLayoutGuide.bottomAnchor : superview.bottomAnchor, constant: -bottom).isActive = true
     }
     if let trailing = trailing {
-      trailingAnchor.constraint(equalTo: safely ? superview.safeAreaLayoutGuide.trailingAnchor : superview.trailingAnchor, constant: -trailing).assign(priority)
+      trailingAnchor.constraint(equalTo: safely ? superview.safeAreaLayoutGuide.trailingAnchor : superview.trailingAnchor, constant: -trailing).isActive = true
     }
   }
   

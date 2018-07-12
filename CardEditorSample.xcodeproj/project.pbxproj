@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		832DDDD5430A44EA33F2A05F /* Pods_CardEditorSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D997DD20E8DEEDA70F5848AA /* Pods_CardEditorSample.framework */; };
 		C7970C2720CB1FDA00EFAB8F /* CardEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7970C2620CB1FDA00EFAB8F /* CardEditorViewModel.swift */; };
-		C7A5A05B20DB9CEB00E66DC6 /* ProjectCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A5A05A20DB9CEB00E66DC6 /* ProjectCard.swift */; };
-		C7A5A05D20DB9CF900E66DC6 /* ProjectCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7A5A05C20DB9CF900E66DC6 /* ProjectCard.xib */; };
+		C7A5A06220DF3D1A00E66DC6 /* ElementCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A5A06120DF3D1A00E66DC6 /* ElementCard.swift */; };
+		C7A5A06520DF3D4A00E66DC6 /* ElementCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7A5A06420DF3D4A00E66DC6 /* ElementCard.xib */; };
 		C7B7003C20CA899200F3B19B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B7003B20CA899200F3B19B /* AppDelegate.swift */; };
 		C7B7003E20CA899200F3B19B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B7003D20CA899200F3B19B /* ViewController.swift */; };
 		C7B7004120CA899200F3B19B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7B7003F20CA899200F3B19B /* Main.storyboard */; };
@@ -32,8 +32,8 @@
 		5D372BDB6CDE19145F9C83A2 /* Pods-CardEditorSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardEditorSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-CardEditorSample/Pods-CardEditorSample.release.xcconfig"; sourceTree = "<group>"; };
 		976C228F717BA9E82CB1A069 /* Pods-CardEditorSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardEditorSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CardEditorSample/Pods-CardEditorSample.debug.xcconfig"; sourceTree = "<group>"; };
 		C7970C2620CB1FDA00EFAB8F /* CardEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEditorViewModel.swift; sourceTree = "<group>"; };
-		C7A5A05A20DB9CEB00E66DC6 /* ProjectCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCard.swift; sourceTree = "<group>"; };
-		C7A5A05C20DB9CF900E66DC6 /* ProjectCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectCard.xib; sourceTree = "<group>"; };
+		C7A5A06120DF3D1A00E66DC6 /* ElementCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementCard.swift; sourceTree = "<group>"; };
+		C7A5A06420DF3D4A00E66DC6 /* ElementCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ElementCard.xib; sourceTree = "<group>"; };
 		C7B7003820CA899200F3B19B /* CardEditorSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardEditorSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7B7003B20CA899200F3B19B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7B7003D20CA899200F3B19B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -93,13 +93,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		C7A5A05920DB9C0500E66DC6 /* Project */ = {
+		C7A5A06020DF3CC000E66DC6 /* Element */ = {
 			isa = PBXGroup;
 			children = (
-				C7A5A05A20DB9CEB00E66DC6 /* ProjectCard.swift */,
-				C7A5A05C20DB9CF900E66DC6 /* ProjectCard.xib */,
+				C7A5A06120DF3D1A00E66DC6 /* ElementCard.swift */,
+				C7A5A06420DF3D4A00E66DC6 /* ElementCard.xib */,
 			);
-			path = Project;
+			path = Element;
 			sourceTree = "<group>";
 		};
 		C7B7002F20CA899200F3B19B = {
@@ -123,7 +123,7 @@
 		C7B7003A20CA899200F3B19B /* CardEditorSample */ = {
 			isa = PBXGroup;
 			children = (
-				C7A5A05920DB9C0500E66DC6 /* Project */,
+				C7A5A06020DF3CC000E66DC6 /* Element */,
 				C7970C2520CB1FC600EFAB8F /* ViewModel */,
 				C7970C2420CB1FA900EFAB8F /* Card */,
 				C7B7004F20CA89C600F3B19B /* Helpers */,
@@ -245,7 +245,7 @@
 			files = (
 				C7B7004620CA899400F3B19B /* LaunchScreen.storyboard in Resources */,
 				C7B7004320CA899400F3B19B /* Assets.xcassets in Resources */,
-				C7A5A05D20DB9CF900E66DC6 /* ProjectCard.xib in Resources */,
+				C7A5A06520DF3D4A00E66DC6 /* ElementCard.xib in Resources */,
 				C7B7004120CA899200F3B19B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,6 +300,7 @@
 			files = (
 				C7970C2720CB1FDA00EFAB8F /* CardEditorViewModel.swift in Sources */,
 				C7B7005E20CA8F3000F3B19B /* CardPresenter.swift in Sources */,
+				C7A5A06220DF3D1A00E66DC6 /* ElementCard.swift in Sources */,
 				C7B7003E20CA899200F3B19B /* ViewController.swift in Sources */,
 				C7B7005220CA89E800F3B19B /* UIView+Autolayout.swift in Sources */,
 				C7B7005320CA89E800F3B19B /* UIView+Aspect.swift in Sources */,
@@ -309,7 +310,6 @@
 				C7B7005620CA8A4000F3B19B /* CardView.swift in Sources */,
 				C7B7006A20CAE87D00F3B19B /* CardViewModel.swift in Sources */,
 				C7B7005820CA8A5400F3B19B /* CardModel.swift in Sources */,
-				C7A5A05B20DB9CEB00E66DC6 /* ProjectCard.swift in Sources */,
 				C7B7006220CA8FCE00F3B19B /* CoverInfoPresenter.swift in Sources */,
 				C7B7005A20CA8A6800F3B19B /* CardPresentable.swift in Sources */,
 			);

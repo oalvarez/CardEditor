@@ -10,11 +10,12 @@ import Foundation
 import RxSwift
 
 struct CardViewModel {
-  private var card: Variable<CardPresenter>
+  
   private var cardInfo: Variable<CoverInfoPresenter>
   var cardInfoObservable: Observable<CoverInfoPresenter> {
     return cardInfo.asObservable()
   }
+  private var card: Variable<CardPresenter>
   var cardObservable: Observable<CardPresenter> {
     return card.asObservable()
   }
@@ -26,16 +27,6 @@ struct CardViewModel {
   
   var title: String { return cardInfo.value.infoTexts.first ?? ""}
   
-  var selectedElementIndex = Variable<Int?>(nil)
-  var selectedElementIndexObservable: Observable<Int?> {
-    return selectedElementIndex.asObservable()
-  }
-  
-  func updateActiveLabel(with text: String) {
-    guard let index = selectedElementIndex.value else { return }
-    updateElement(at: index, with: text)
-  }
-  
   func string(at index: Int) -> String {
     return cardInfo.value.infoTexts[index]
   }
@@ -45,6 +36,17 @@ struct CardViewModel {
   func toggleShowFrames() { showFrames.value.toggle() }
   var showFramesObservable: Observable<Bool> {
     return showFrames.asObservable()
+  }
+  
+  var selectedImageIndex: Int = -1
+  mutating func incrementSelectedImageIndex() {
+    selectedImageIndex += 1
+  }
+  
+  func updateSelectedImageName(with text: String) {
+    guard 0..<cardInfo.value.imageNames.count ~= selectedImageIndex
+     else { return }
+    cardInfo.value.imageNames[selectedImageIndex] = text
   }
   
   func updateElement(at index: Int, with text: String) {

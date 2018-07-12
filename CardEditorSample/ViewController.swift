@@ -15,7 +15,9 @@ class ViewController: UIViewController {
   @IBOutlet weak var slider: UISlider!
   @IBOutlet weak var shadowSwitch: UISwitch!
   @IBOutlet weak var textField: UITextField!
-  @IBOutlet weak var cardView: ProjectCard!
+  @IBOutlet weak var cardView: ElementCard!
+  @IBOutlet weak var nextButton: UIButton!
+  
   let bag = DisposeBag()
   
   var viewModel = CardEditorViewModel()
@@ -27,6 +29,8 @@ class ViewController: UIViewController {
     
     cardView.configureCard(with: cardViewModel)
     cardView.configureCardForEdition()
+    //TODO: Move this logic to the view Model
+    cardView.viewModel.selectedImageIndex = 0
     cardView.configureFontStyle()
     textField.text = cardView.viewModel.title
     configureObservables()
@@ -52,24 +56,22 @@ class ViewController: UIViewController {
     .bind(to: viewModel.shadowIsOn)
     .disposed(by: bag)
     
-    viewModel.introducedStringObservable
-      .subscribe(onNext: { [weak self] in
-        guard let strongSelf = self else { return }
-        strongSelf.cardView.viewModel.updateActiveLabel(with: $0)
+    nextButton.rx
+    .tap
+    .asDriver()
+    .drive(onNext: { [weak self] in
+      guard let strongSelf = self else { return }
+      strongSelf.cardView.viewModel.incrementSelectedImageIndex()
     })
     .disposed(by: bag)
     
-    cardView.viewModel.selectedElementIndexObservable
+    viewModel.introducedStringObservable
       .subscribe(onNext: { [weak self] in
         guard let strongSelf = self else { return }
-        guard let index = $0 else {
-          strongSelf.textField.text = "No label selected"
-          return
-        }
-        let text = strongSelf.cardView.viewModel.string(at: index)
-        strongSelf.textField.text = text
-      })
-      .disposed(by: bag)
+        strongSelf.cardView.viewModel.updateSelectedImageName(with: $0)
+        print("Update image with url: \($0)")
+    })
+    .disposed(by: bag)
     
     viewModel.introducedRadiusObservable
       .subscribe(onNext: {[weak self] in
@@ -85,6 +87,35 @@ class ViewController: UIViewController {
       })
     .disposed(by: bag)
     
+    
+    cardView.coverImage.applyShinny()
+
   }
 }
 
+extension UIView {
+  func applyShinny() {
+    
+    let shiny = UIView()
+    shiny.backgroundColor = UIColor.init(white: 1, alpha: 0.3)
+    shiny.frame = bounds
+    addSubview(shiny)
+    shiny.pinToSuperview()
+    print(shiny.constraints.count)
+    
+    let gradientLayer = CAGradientLayer()
+    gradientLayer.colors = [UIColor.clear.cgColor,  UIColor.white.cgColor, UIColor.clear.cgColor]
+    gradientLayer.startPoint = CGPoint(x: 0, y: 0.40)
+    gradientLayer.endPoint = CGPoint(x: 1, y: 0.60)
+    gradientLayer.frame = CGRect.init(x: 0, y: 0, width: frame.width, height: frame.height)
+
+    shiny.layer.mask = gradientLayer
+
+    let animation = CABasicAnimation(keyPath: "transform.translation.x")
+    animation.fromValue = -shiny.frame.width
+    animation.toValue = shiny.frame.width
+    animation.repeatCount = .infinity
+    animation.duration = 1
+    gradientLayer.add(animation, forKey: "shimmerAnimation")
+  }
+}
