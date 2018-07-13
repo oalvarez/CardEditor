@@ -12,21 +12,32 @@ import RxSwift
 class CardView: UIView {
   
   let bag = DisposeBag()
-  var viewModel: CardViewModel!
-
-  var textFields: [UITextField] { return [] }
-  var imageViews : [UIImageView] { return [] }
-  var fullCardViews : [UIView] { return [] }
-}
-
-extension CardView {
-  var selectedTextField: UITextField? {
-    return textFields.first(where: { $0.isFirstResponder } )
-  }
-}
-
-extension CardView {
+  var viewModel: CardViewModelProtocol!
   
+  @IBOutlet weak var coverImage: UIImageView!
+  @IBOutlet weak var iconImage: UIImageView!
+  @IBOutlet weak var backView: UIView!
+  
+  @IBOutlet weak var title: UITextField!
+  @IBOutlet weak var year: UITextField!
+  @IBOutlet weak var subtitle: UITextField!
+  @IBOutlet weak var overAbout: UITextField!
+  @IBOutlet weak var about: UITextView! {
+    didSet {
+      about.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+      about.textContainer.lineFragmentPadding = 0
+    }
+  }
+  
+  @IBOutlet var view: UIView!
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    loadNibFile()
+  }
+
+}
+
+extension CardView {
   func addTapGestureForEdition() {
     let cardTap = UITapGestureRecognizer(target: self, action: #selector(tapCard))
     self.addGestureRecognizer(cardTap)
@@ -35,70 +46,39 @@ extension CardView {
   @objc func tapCard(_ sender: UITapGestureRecognizer) {
     viewModel.toggleShowFrames()
   }
-  
 }
 
-extension CardView {
-  
-  func showEmptyFields(_ show:Bool) {
-    textFields.forEach {
-      $0.isHidden = $0.text!.isEmpty ? !show : false
-    }
+extension CardView: CardViewProtocol {
+  var imageViews: [UIImageView] {
+    return [
+      coverImage,
+      iconImage
+    ]
   }
-  
-  func showPopulatedFields(_ show:Bool) {
-    textFields.forEach {
-      $0.isHidden = $0.text!.isEmpty ? true : !show
-    }
+  var fullCardViews: [UIView] {
+    return [
+      coverImage,
+      backView
+    ]
   }
-  
-  func prepareFieldsForEdition(_ edition: Bool) {
-    textFields.forEach {
-      $0.isUserInteractionEnabled = edition
-    }
-  }
-}
-
-//MARK - Configuration of the Card
-extension CardView {
-  func configureCard(with viewModel: CardViewModel) {
-    self.viewModel = viewModel
-    configureObservables()
-  }
-  func configureCardForEdition() {
-    addTapGestureForEdition()
+  var textFields: [UITextField] {
+    return [
+      title,
+      year,
+      subtitle,
+      overAbout
+    ]
   }
 }
 
 extension CardView {
-  func configureObservables() {
-    viewModel.cardInfoObservable
-      .subscribe(onNext: { [weak self] cardInfo in
-        guard let strongSelf = self else { return }
-        for (label, text) in zip(strongSelf.textFields, cardInfo.infoTexts) {
-          label.text = text
-        }
-        for (imageView, name) in zip(strongSelf.imageViews, cardInfo.imageNames) {
-          imageView.image = UIImage(named: name)
-        }
-      })
-    .disposed(by: bag)
-    
-    viewModel.cardObservable
-      .subscribe(onNext: { [weak self] card in
-        guard let strongSelf = self else { return }
-        strongSelf.fullCardViews.forEach {
-          $0.cornerRadius = card.radius
-        }
-        strongSelf.withShadow = card.shadow
-      })
-    .disposed(by: bag)
-    
-    viewModel.showFramesObservable
-      .subscribe(onNext: { [weak self] in
-        guard let strongSelf = self else { return }
-        strongSelf.showEmptyFields($0)
-      })
-      .disposed(by: bag)
+  func configureFontStyle() {
+    title.font = .titleFont
+    year.font = .yearFont
+    subtitle.font = .subtitleFont
+    overAbout.font = .overAboutFont
+    about.font = .aboutFont
   }
 }
+
+extension CardView: NibLoaderViewProtocol { }

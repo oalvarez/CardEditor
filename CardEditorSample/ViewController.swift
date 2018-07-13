@@ -15,7 +15,7 @@ class ViewController: UIViewController {
   @IBOutlet weak var slider: UISlider!
   @IBOutlet weak var shadowSwitch: UISwitch!
   @IBOutlet weak var textField: UITextField!
-  @IBOutlet weak var cardView: ElementCard!
+  @IBOutlet weak var cardView: CardView!
   @IBOutlet weak var nextButton: UIButton!
   
   let bag = DisposeBag()
@@ -30,9 +30,8 @@ class ViewController: UIViewController {
     cardView.configureCard(with: cardViewModel)
     cardView.configureCardForEdition()
     //TODO: Move this logic to the view Model
-    cardView.viewModel.selectedImageIndex = 0
+//    cardView.viewModel.selectedImageIndex = 0
     cardView.configureFontStyle()
-    textField.text = cardView.viewModel.title
     configureObservables()
     // Do any additional setup after loading the view, typically from a nib.
   }

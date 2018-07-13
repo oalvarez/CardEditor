@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="082-Ut-J1P" customClass="ElementCard" customModule="CardEditorSample" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="082-Ut-J1P" customClass="CardView" customModule="CardEditorSample" customModuleProvider="target">
                                 <rect key="frame" x="12.5" y="70" width="350" height="225"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -41,13 +41,13 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="KsK-Hs-oY0">
-                                <rect key="frame" x="12.5" y="380" width="382" height="31"/>
+                                <rect key="frame" x="12.5" y="380" width="390" height="31"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="0.0" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="alT-CU-VPI">
-                                        <rect key="frame" x="-2" y="0.0" width="301" height="32"/>
+                                        <rect key="frame" x="-2" y="0.0" width="309" height="32"/>
                                     </slider>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GSV-dL-ivG">
-                                        <rect key="frame" x="333" y="0.0" width="51" height="31"/>
+                                        <rect key="frame" x="341" y="0.0" width="51" height="31"/>
                                     </switch>
                                 </subviews>
                             </stackView>
