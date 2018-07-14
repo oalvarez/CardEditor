@@ -48,6 +48,16 @@ extension CardView {
   }
 }
 
+extension CardView {
+  func configureFontStyle() {
+    title.font = .titleFont
+    year.font = .yearFont
+    subtitle.font = .subtitleFont
+    overAbout.font = .overAboutFont
+    about.font = .aboutFont
+  }
+}
+
 extension CardView: CardViewProtocol {
   var imageViews: [UIImageView] {
     return [
@@ -68,16 +78,6 @@ extension CardView: CardViewProtocol {
       subtitle,
       overAbout
     ]
-  }
-}
-
-extension CardView {
-  func configureFontStyle() {
-    title.font = .titleFont
-    year.font = .yearFont
-    subtitle.font = .subtitleFont
-    overAbout.font = .overAboutFont
-    about.font = .aboutFont
   }
 }
 

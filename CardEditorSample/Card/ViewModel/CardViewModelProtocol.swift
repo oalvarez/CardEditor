@@ -15,6 +15,7 @@ protocol CardViewModelProtocol {
   var showFrames: Variable<Bool> { get }
   var selectedImageIndex: Int { get set }
   
+  init(with card: CardPresenter, cardInfo: CoverInfoPresenter)
   var cardInfoObservable: Observable<CoverInfoPresenter> { get }
   var cardObservable: Observable<CardPresenter> { get }
   var showFramesObservable: Observable<Bool> { get }
