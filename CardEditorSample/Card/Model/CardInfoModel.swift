@@ -1,5 +1,5 @@
 //
-//  CoverInfoModel.swift
+//  CardInfoModel.swift
 //  CardEditorSample
 //
 //  Created by Oscar Alvarez on 08/06/2018.
@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-struct CoverInfoModel: CoverInfoPresenter {
+struct CardInfoModel: CardInfo {
   
   var infoTexts: [String]
   var imageNames: [String]

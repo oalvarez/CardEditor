@@ -25,7 +25,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let cardViewModel = CardViewModel(with: CardModel(), cardInfo: CoverInfoModel())
+    let cardViewModel = CardViewModel(with: CardModel(), cardInfo: CardInfoModel())
     
     cardView.configureCard(with: cardViewModel)
     cardView.configureCardForEdition()

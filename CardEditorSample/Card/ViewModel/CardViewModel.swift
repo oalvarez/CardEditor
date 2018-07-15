@@ -11,15 +11,15 @@ import RxSwift
 
 struct CardViewModel {
   
-  internal var cardInfo: Variable<CoverInfoPresenter>
-  internal var card: Variable<CardPresenter>
+  internal var cardInfo: Variable<CardInfo>
+  internal var card: Variable<Card>
   internal var showFrames = Variable<Bool>(false)
   
   var selectedImageIndex: Int = -1
   
-  init(with card: CardPresenter, cardInfo: CoverInfoPresenter) {
-    self.card = Variable<CardPresenter>(card)
-    self.cardInfo = Variable<CoverInfoPresenter>(cardInfo)
+  init(with card: Card, cardInfo: CardInfo) {
+    self.card = Variable<Card>(card)
+    self.cardInfo = Variable<CardInfo>(cardInfo)
   }
 }
 

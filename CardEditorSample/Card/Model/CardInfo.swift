@@ -1,5 +1,5 @@
 //
-//  CoverInfoPresenter.swift
+//  CardInfo.swift
 //  CardEditorSample
 //
 //  Created by Oscar Alvarez on 08/06/2018.
@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-protocol CoverInfoPresenter {
+protocol CardInfo {
   var infoTexts: [String] { get set }
   var imageNames: [String] { get set }
 }
