@@ -11,7 +11,7 @@ import RxSwift
 
 protocol CardViewProtocol: class {
   var bag: DisposeBag { get }
-  var viewModel: CardViewModelProtocol! { get set }
+  var viewModel: CardWithInfoPresentable! { get set }
   
   var textFields: [UITextField] { get }
   var imageViews : [UIImageView] { get }
@@ -41,9 +41,7 @@ extension CardViewProtocol where Self: UIView {
     }
   }
   
-  //Second extension of ViewCard
-  
-  func configureCard(with viewModel: CardViewModelProtocol) {
+  func configureCard(with viewModel: CardWithInfoPresentable) {
     self.viewModel = viewModel
     configureObservables()
   }

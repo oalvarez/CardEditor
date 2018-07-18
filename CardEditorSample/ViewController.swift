@@ -29,6 +29,8 @@ class ViewController: UIViewController {
     
     cardView.configureCard(with: cardViewModel)
     cardView.configureCardForEdition()
+    
+    
     //TODO: Move this logic to the view Model
 //    cardView.viewModel.selectedImageIndex = 0
     cardView.configureFontStyle()

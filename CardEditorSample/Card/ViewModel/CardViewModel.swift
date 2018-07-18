@@ -23,4 +23,4 @@ struct CardViewModel {
   }
 }
 
-extension CardViewModel: CardViewModelProtocol { }
+extension CardViewModel: CardWithInfoPresentable { }

@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		832DDDD5430A44EA33F2A05F /* Pods_CardEditorSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D997DD20E8DEEDA70F5848AA /* Pods_CardEditorSample.framework */; };
 		C72A21AB20F9F00C00E2D47C /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C72A21AA20F9F00C00E2D47C /* CardView.xib */; };
-		C77BF3E520F93B9A00E96EF9 /* CardViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77BF3E420F93B9A00E96EF9 /* CardViewModelProtocol.swift */; };
+		C769CFEA20FBD3E6009561F4 /* CardPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C769CFE920FBD3E6009561F4 /* CardPresentable.swift */; };
+		C769CFEC20FBD412009561F4 /* CardInfoPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C769CFEB20FBD412009561F4 /* CardInfoPresentable.swift */; };
+		C77BF3E520F93B9A00E96EF9 /* CardWithInfoPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77BF3E420F93B9A00E96EF9 /* CardWithInfoPresentable.swift */; };
 		C77BF3E720F93BF800E96EF9 /* CardViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77BF3E620F93BF800E96EF9 /* CardViewProtocol.swift */; };
 		C77BF3E920F9615200E96EF9 /* NibLoaderViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77BF3E820F9615200E96EF9 /* NibLoaderViewProtocol.swift */; };
 		C7970C2720CB1FDA00EFAB8F /* CardEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7970C2620CB1FDA00EFAB8F /* CardEditorViewModel.swift */; };
@@ -33,7 +35,9 @@
 		5D372BDB6CDE19145F9C83A2 /* Pods-CardEditorSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardEditorSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-CardEditorSample/Pods-CardEditorSample.release.xcconfig"; sourceTree = "<group>"; };
 		976C228F717BA9E82CB1A069 /* Pods-CardEditorSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardEditorSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CardEditorSample/Pods-CardEditorSample.debug.xcconfig"; sourceTree = "<group>"; };
 		C72A21AA20F9F00C00E2D47C /* CardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
-		C77BF3E420F93B9A00E96EF9 /* CardViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModelProtocol.swift; sourceTree = "<group>"; };
+		C769CFE920FBD3E6009561F4 /* CardPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPresentable.swift; sourceTree = "<group>"; };
+		C769CFEB20FBD412009561F4 /* CardInfoPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoPresentable.swift; sourceTree = "<group>"; };
+		C77BF3E420F93B9A00E96EF9 /* CardWithInfoPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardWithInfoPresentable.swift; sourceTree = "<group>"; };
 		C77BF3E620F93BF800E96EF9 /* CardViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewProtocol.swift; sourceTree = "<group>"; };
 		C77BF3E820F9615200E96EF9 /* NibLoaderViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoaderViewProtocol.swift; sourceTree = "<group>"; };
 		C7970C2620CB1FDA00EFAB8F /* CardEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEditorViewModel.swift; sourceTree = "<group>"; };
@@ -144,7 +148,9 @@
 			isa = PBXGroup;
 			children = (
 				C7B7006920CAE87D00F3B19B /* CardViewModel.swift */,
-				C77BF3E420F93B9A00E96EF9 /* CardViewModelProtocol.swift */,
+				C77BF3E420F93B9A00E96EF9 /* CardWithInfoPresentable.swift */,
+				C769CFE920FBD3E6009561F4 /* CardPresentable.swift */,
+				C769CFEB20FBD412009561F4 /* CardInfoPresentable.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -294,7 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7970C2720CB1FDA00EFAB8F /* CardEditorViewModel.swift in Sources */,
-				C77BF3E520F93B9A00E96EF9 /* CardViewModelProtocol.swift in Sources */,
+				C77BF3E520F93B9A00E96EF9 /* CardWithInfoPresentable.swift in Sources */,
 				C7B7005E20CA8F3000F3B19B /* Card.swift in Sources */,
 				C77BF3E920F9615200E96EF9 /* NibLoaderViewProtocol.swift in Sources */,
 				C7B7003E20CA899200F3B19B /* ViewController.swift in Sources */,
@@ -308,6 +314,8 @@
 				C7B7006A20CAE87D00F3B19B /* CardViewModel.swift in Sources */,
 				C7B7005820CA8A5400F3B19B /* CardModel.swift in Sources */,
 				C7B7006220CA8FCE00F3B19B /* CardInfo.swift in Sources */,
+				C769CFEA20FBD3E6009561F4 /* CardPresentable.swift in Sources */,
+				C769CFEC20FBD412009561F4 /* CardInfoPresentable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

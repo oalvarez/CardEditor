@@ -10,9 +10,8 @@ import UIKit
 import RxSwift
 
 class CardView: UIView {
-  
   let bag = DisposeBag()
-  var viewModel: CardViewModelProtocol!
+  var viewModel: CardWithInfoPresentable!
   
   @IBOutlet weak var coverImage: UIImageView!
   @IBOutlet weak var iconImage: UIImageView!
