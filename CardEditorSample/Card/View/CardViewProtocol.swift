@@ -53,6 +53,10 @@ extension CardViewProtocol where Self: UIView {
   
   func configureObservables() {
     viewModel.cardInfoObservable
+//      .distinctUntilChanged {
+//        print("🍉", $0.textFieldsInfo == $1.textFieldsInfo)
+//        return $0.textFieldsInfo == $1.textFieldsInfo
+//      }
       .subscribe(onNext: { [weak self] cardInfo in
         guard let strongSelf = self else { return }
         for (textField, text) in zip(strongSelf.textFields, cardInfo.textFieldsInfo) {
@@ -89,11 +93,11 @@ extension CardViewProtocol where Self: UIView {
         .controlEvent(.editingChanged)
         .asObservable()
         .subscribe(onNext: {
-          print("Should update Model")
-          print("Consider to make the fields Variables and not the cardInfo")
-          self.textFields.forEach {
-            print($0.text)
-          }
+          var texts = self.textFields.map { $0.text ?? "" }
+          self.viewModel.updateTextFields(with: texts)
+          
+          texts = self.textViews.map { $0.text ?? "" }
+          self.viewModel.updateTextViews(with: texts)
         })
         .disposed(by: bag)
     }

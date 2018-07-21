@@ -51,4 +51,18 @@ extension CardInfoPresentable {
   func string(at index: Int) -> String {
     return cardInfo.value.textFieldsInfo[index]
   }
+  
+  func updateTextFields(with info: [String]) {
+    cardInfo.value.textFieldsInfo = info
+  }
+  
+  func updateTextViews(with info: [String]) {
+    cardInfo.value.textViewsInfo = info
+  }
+  
+  func printValues() {
+    cardInfo.value.textFieldsInfo.forEach {
+      print($0)
+    }
+  }
 }

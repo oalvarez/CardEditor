@@ -20,6 +20,7 @@ struct CardInfoModel: Codable {
 }
 
 extension CardInfoModel: CardInfo {
+  //Podríamos añadir un enumerado que manejase el acceso a las propiedades para evetar el seteo con subscripts??
   var textViewsInfo: [String] {
     get { return [about] }
     set { about = newValue[0] }

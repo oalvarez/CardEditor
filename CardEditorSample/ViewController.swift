@@ -66,7 +66,8 @@ class ViewController: UIViewController {
     .asDriver()
     .drive(onNext: { [weak self] in
       guard let strongSelf = self else { return }
-      strongSelf.cardView.viewModel.incrementSelectedImageIndex()
+      //strongSelf.cardView.viewModel.incrementSelectedImageIndex()
+      strongSelf.viewModel.printValues()
     })
     .disposed(by: bag)
     
