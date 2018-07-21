@@ -78,6 +78,11 @@ extension CardView: CardViewProtocol {
       overAbout
     ]
   }
+  var textViews: [UITextView] {
+    return [
+      about
+    ]
+  }
 }
 
 extension CardView: NibLoaderViewProtocol { }

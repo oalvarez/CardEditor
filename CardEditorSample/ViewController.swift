@@ -20,14 +20,18 @@ class ViewController: UIViewController {
   
   let bag = DisposeBag()
   
-  var viewModel = CardEditorViewModel()
+  var viewModel: CardViewModel!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let cardViewModel = CardViewModel(with: CardModel(), cardInfo: CardInfoModel())
+    let path = Bundle.main.path(forResource: "Test", ofType: "json")!
+    let data = try! Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+    let model = try! JSONDecoder().decode(CardInfoModel.self, from: data)
     
-    cardView.configureCard(with: cardViewModel)
+    viewModel = CardViewModel(with: CardModel(), cardInfo: model)
+    
+    cardView.configureCard(with: viewModel)
     cardView.configureCardForEdition()
     
     
@@ -40,22 +44,22 @@ class ViewController: UIViewController {
   
   func configureObservables() {
     
-    textField.rx
-    .text
-    .orEmpty
-    .bind(to: viewModel.introducedSring)
-    .disposed(by: bag)
-    
-    slider.rx
-    .value
-    .map { CGFloat($0)}
-    .bind(to: viewModel.introducedRadius)
-    .disposed(by: bag)
-    
-    shadowSwitch.rx
-    .isOn
-    .bind(to: viewModel.shadowIsOn)
-    .disposed(by: bag)
+//    textField.rx
+//    .text
+//    .orEmpty
+//    .bind(to: viewModel.introducedSring)
+//    .disposed(by: bag)
+//
+//    slider.rx
+//    .value
+//    .map { CGFloat($0)}
+//    .bind(to: viewModel.card.value.radius)
+//    .disposed(by: bag)
+//
+//    shadowSwitch.rx
+//    .isOn
+//    .bind(to: viewModel.shadowIsOn)
+//    .disposed(by: bag)
     
     nextButton.rx
     .tap
@@ -66,27 +70,27 @@ class ViewController: UIViewController {
     })
     .disposed(by: bag)
     
-    viewModel.introducedStringObservable
-      .subscribe(onNext: { [weak self] in
-        guard let strongSelf = self else { return }
-        strongSelf.cardView.viewModel.updateSelectedImageName(with: $0)
-        print("Update image with url: \($0)")
-    })
-    .disposed(by: bag)
-    
-    viewModel.introducedRadiusObservable
-      .subscribe(onNext: {[weak self] in
-        guard let strongSelf = self else { return }
-        strongSelf.cardView.viewModel.upateCornerRadius(with: $0)
-      })
-      .disposed(by: bag)
-    
-    viewModel.shadowIsOnObservable
-      .subscribe(onNext: { [weak self] in
-        guard let strongSelf = self else { return }
-        strongSelf.cardView.viewModel.upateShadow(with: $0)
-      })
-    .disposed(by: bag)
+//    viewModel.introducedStringObservable
+//      .subscribe(onNext: { [weak self] in
+//        guard let strongSelf = self else { return }
+//        strongSelf.cardView.viewModel.updateSelectedImageName(with: $0)
+//        print("Update image with url: \($0)")
+//    })
+//    .disposed(by: bag)
+//
+//    viewModel.introducedRadiusObservable
+//      .subscribe(onNext: {[weak self] in
+//        guard let strongSelf = self else { return }
+//        strongSelf.cardView.viewModel.upateCornerRadius(with: $0)
+//      })
+//      .disposed(by: bag)
+//
+//    viewModel.shadowIsOnObservable
+//      .subscribe(onNext: { [weak self] in
+//        guard let strongSelf = self else { return }
+//        strongSelf.cardView.viewModel.upateShadow(with: $0)
+//      })
+//    .disposed(by: bag)
     
     
     cardView.coverImage.applyShinny()

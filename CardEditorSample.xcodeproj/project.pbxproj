@@ -14,6 +14,8 @@
 		C77BF3E520F93B9A00E96EF9 /* CardWithInfoPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77BF3E420F93B9A00E96EF9 /* CardWithInfoPresentable.swift */; };
 		C77BF3E720F93BF800E96EF9 /* CardViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77BF3E620F93BF800E96EF9 /* CardViewProtocol.swift */; };
 		C77BF3E920F9615200E96EF9 /* NibLoaderViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77BF3E820F9615200E96EF9 /* NibLoaderViewProtocol.swift */; };
+		C788CCEC2103840D00F287A0 /* Test.json in Resources */ = {isa = PBXBuildFile; fileRef = C788CCEB2103840D00F287A0 /* Test.json */; };
+		C788CCEE2103995A00F287A0 /* Test2.json in Resources */ = {isa = PBXBuildFile; fileRef = C788CCED2103995900F287A0 /* Test2.json */; };
 		C7970C2720CB1FDA00EFAB8F /* CardEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7970C2620CB1FDA00EFAB8F /* CardEditorViewModel.swift */; };
 		C7B7003C20CA899200F3B19B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B7003B20CA899200F3B19B /* AppDelegate.swift */; };
 		C7B7003E20CA899200F3B19B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B7003D20CA899200F3B19B /* ViewController.swift */; };
@@ -40,6 +42,8 @@
 		C77BF3E420F93B9A00E96EF9 /* CardWithInfoPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardWithInfoPresentable.swift; sourceTree = "<group>"; };
 		C77BF3E620F93BF800E96EF9 /* CardViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewProtocol.swift; sourceTree = "<group>"; };
 		C77BF3E820F9615200E96EF9 /* NibLoaderViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoaderViewProtocol.swift; sourceTree = "<group>"; };
+		C788CCEB2103840D00F287A0 /* Test.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Test.json; sourceTree = "<group>"; };
+		C788CCED2103995900F287A0 /* Test2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Test2.json; sourceTree = "<group>"; };
 		C7970C2620CB1FDA00EFAB8F /* CardEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEditorViewModel.swift; sourceTree = "<group>"; };
 		C7B7003820CA899200F3B19B /* CardEditorSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardEditorSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7B7003B20CA899200F3B19B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 				C7B7004220CA899400F3B19B /* Assets.xcassets */,
 				C7B7004420CA899400F3B19B /* LaunchScreen.storyboard */,
 				C7B7004720CA899400F3B19B /* Info.plist */,
+				C788CCEB2103840D00F287A0 /* Test.json */,
+				C788CCED2103995900F287A0 /* Test2.json */,
 			);
 			path = CardEditorSample;
 			sourceTree = "<group>";
@@ -248,6 +254,8 @@
 				C7B7004320CA899400F3B19B /* Assets.xcassets in Resources */,
 				C72A21AB20F9F00C00E2D47C /* CardView.xib in Resources */,
 				C7B7004120CA899200F3B19B /* Main.storyboard in Resources */,
+				C788CCEE2103995A00F287A0 /* Test2.json in Resources */,
+				C788CCEC2103840D00F287A0 /* Test.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

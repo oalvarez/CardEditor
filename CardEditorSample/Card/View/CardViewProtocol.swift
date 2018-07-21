@@ -14,6 +14,7 @@ protocol CardViewProtocol: class {
   var viewModel: CardWithInfoPresentable! { get set }
   
   var textFields: [UITextField] { get }
+  var textViews: [UITextView] { get }
   var imageViews : [UIImageView] { get }
   var fullCardViews : [UIView] { get }
 }
@@ -54,8 +55,11 @@ extension CardViewProtocol where Self: UIView {
     viewModel.cardInfoObservable
       .subscribe(onNext: { [weak self] cardInfo in
         guard let strongSelf = self else { return }
-        for (label, text) in zip(strongSelf.textFields, cardInfo.infoTexts) {
-          label.text = text
+        for (textField, text) in zip(strongSelf.textFields, cardInfo.textFieldsInfo) {
+          textField.text = text
+        }
+        for (textView, text) in zip(strongSelf.textViews, cardInfo.textViewsInfo) {
+          textView.text = text
         }
         for (imageView, name) in zip(strongSelf.imageViews, cardInfo.imageNames) {
           imageView.image = UIImage(named: name)
@@ -79,6 +83,21 @@ extension CardViewProtocol where Self: UIView {
         strongSelf.showEmptyFields($0)
       })
       .disposed(by: bag)
+    
+    textFields.forEach {
+      $0.rx
+        .controlEvent(.editingChanged)
+        .asObservable()
+        .subscribe(onNext: {
+          print("Should update Model")
+          print("Consider to make the fields Variables and not the cardInfo")
+          self.textFields.forEach {
+            print($0.text)
+          }
+        })
+        .disposed(by: bag)
+    }
   }
+
 }
 

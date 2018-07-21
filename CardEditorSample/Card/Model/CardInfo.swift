@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 
 protocol CardInfo {
-  var infoTexts: [String] { get set }
+  var textViewsInfo: [String] { get set }
+  var textFieldsInfo: [String] { get set }
   var imageNames: [String] { get set }
 }

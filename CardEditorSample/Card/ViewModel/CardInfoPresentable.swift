@@ -33,7 +33,7 @@ extension CardInfoPresentable {
   }
   
   func updateElement(at index: Int, with text: String) {
-    cardInfo.value.infoTexts[index] = text
+    cardInfo.value.textFieldsInfo[index] = text
   }
   
   mutating func incrementSelectedImageIndex() {
@@ -49,6 +49,6 @@ extension CardInfoPresentable {
   }
   
   func string(at index: Int) -> String {
-    return cardInfo.value.infoTexts[index]
+    return cardInfo.value.textFieldsInfo[index]
   }
 }

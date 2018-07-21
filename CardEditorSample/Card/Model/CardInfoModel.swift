@@ -9,32 +9,47 @@
 import Foundation
 import RxSwift
 
-struct CardInfoModel: CardInfo {
-  
-  var infoTexts: [String]
-  var imageNames: [String]
-  
-  public init(with cover: String = "cover.jpg", icon: String = "icon.png", title: String = "AdventCalendar", subtitle: String = "American Greetings", overDescription: String = "Cocos2D - Objective-C", about: String = "Advent Calendar over London Landscape. Every day user is able to unlock a building in London and enjoy the movement of Christmas", year: String = "2012") {
-    
-    infoTexts = [
-      title,
-      year,
-      subtitle,
-      overDescription,
-      about,
-      cover
-    ]
-    
-    imageNames = [
-      cover,
-      icon
-    ]
-    
+struct CardInfoModel: Codable {
+  var title: String
+  var year: String
+  var subtitle: String
+  var overDescription: String
+  var about: String
+  var cover: String
+  var icon: String
+}
+
+extension CardInfoModel: CardInfo {
+  var textViewsInfo: [String] {
+    get { return [about] }
+    set { about = newValue[0] }
   }
   
-  public init(with infoTexts: [String], andImageNames imageNames:[String]) {
-    self.infoTexts = infoTexts
-    self.imageNames = imageNames
+  var textFieldsInfo: [String] {
+    get { return [title, year, subtitle, overDescription] }
+    set {
+      title = newValue[0]
+      year = newValue[1]
+      subtitle = newValue[2]
+      overDescription = newValue[3]
+    }
   }
+  
+  var imageNames: [String] {
+    get {  return [cover, icon] }
+    set {
+      cover = newValue[0]
+      icon = newValue[1]
+    }
+  }
+  
   
 }
+
+
+// For Text2 Json tipo
+//struct CardInfoModel: CardInfo, Codable {
+//  var textViewsInfo: [String]
+//  var textFieldsInfo: [String]
+//  var imageNames: [String]
+//}
