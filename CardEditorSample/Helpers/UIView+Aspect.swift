@@ -3,7 +3,7 @@ import UIKit
 
 public extension UIView {
 
-    public var borderWidth: CGFloat {
+    public var borderWith: CGFloat {
         get { return layer.borderWidth }
         set(newBorderWidth) { layer.borderWidth = newBorderWidth }
     }
@@ -58,25 +58,4 @@ public extension UIView {
             shadowOpacity = shadowed ? 0.25 : 0
         }
     }
-}
-
-
-extension UIView {
-  func underline(_ underline: Bool) {
-    self.subviews.last(where: { $0.tag == 1001 })?.removeFromSuperview()
-    if underline {
-      let view = UIView()
-      view.tag = 1001
-      view.backgroundColor = .white
-      view.setSizeTo(height: 1)
-      self.addSubview(view)
-      view.pinToSuperview(top: nil)
-    }
-  }
-  
-  func showBorder(_ show: Bool) {
-    borderWidth = show ? 1 : 0
-    borderColor = show ? UIColor.init(white: 1, alpha: 0.5) : .clear
-    cornerRadius = 3
-  }
 }

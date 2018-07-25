@@ -9,8 +9,8 @@
 import UIKit
 
 extension UIFont {
-  static var titleFont: UIFont    { return UIFont.systemFont(ofSize: 28, weight: .semibold) }
-  static var yearFont: UIFont     { return UIFont.systemFont(ofSize: 28, weight: .bold) }
+  static var titleFont: UIFont    { return UIFont.systemFont(ofSize: 32, weight: .semibold) }
+  static var yearFont: UIFont     { return UIFont.systemFont(ofSize: 24, weight: .bold) }
   static var subtitleFont: UIFont { return UIFont.systemFont(ofSize: 18, weight: .medium) }
   static var overAboutFont: UIFont { return UIFont.systemFont(ofSize: 18, weight: .semibold) }
   static var aboutFont: UIFont    { return UIFont.systemFont(ofSize: 16, weight: .medium) }
