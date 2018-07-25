@@ -8,7 +8,7 @@
 
 import CoreGraphics
 
-struct CardModel: CardPresenter {
+struct CardModel: Card {
   var radius: CGFloat = 10
   var shadow: Bool = true
   var size: CGSize = CGSize(width: 350, height: 225)
