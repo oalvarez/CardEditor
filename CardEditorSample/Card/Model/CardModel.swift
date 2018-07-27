@@ -9,6 +9,7 @@
 import CoreGraphics
 
 struct CardModel: Card {
+  var cornerRounded: (topLeft: Bool, topRight: Bool, bottomLeft: Bool, bottomRight: Bool)? = nil //(true, false, false, false)
   var radius: CGFloat = 10
   var shadow: Bool = true
   var size: CGSize = CGSize(width: 350, height: 225)

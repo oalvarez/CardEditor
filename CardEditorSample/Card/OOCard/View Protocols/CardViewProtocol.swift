@@ -12,11 +12,11 @@ import RxSwift
 protocol CardViewProtocol: class {
   var bag: DisposeBag { get }
   var viewModel: CardWithInfoPresentable! { get set }
+  var contentView: UIView! { get }
   
   var textFields: [UITextField] { get }
   var textViews: [UITextView] { get }
   var imageViews : [UIImageView] { get }
-  var fullCardViews : [UIView] { get }
 }
 
 extension CardViewProtocol where Self: UIView {
@@ -52,6 +52,7 @@ extension CardViewProtocol where Self: UIView {
   }
   
   func configureObservables() {
+    contentView.frame = bounds
     viewModel.cardInfoObservable
 //      .distinctUntilChanged {
 //        print("🍉", $0.textFieldsInfo == $1.textFieldsInfo)
@@ -74,8 +75,15 @@ extension CardViewProtocol where Self: UIView {
     viewModel.cardObservable
       .subscribe(onNext: { [weak self] card in
         guard let strongSelf = self else { return }
-        strongSelf.fullCardViews.forEach {
-          $0.cornerRadius = card.radius
+        if let corners = card.roundedCorners {
+          let cornerRadius: UIRectCorner = [corners.bottomLeft  ? .bottomLeft : [],
+                                            corners.bottomRight ? .bottomRight : [],
+                                            corners.topLeft     ? .topLeft : [],
+                                            corners.topRight    ? .topRight : []]
+          strongSelf.contentView.setCornerRadius(with: cornerRadius, and: card.radius)
+        }
+        else {
+          strongSelf.contentView.cornerRadius = card.radius
         }
         strongSelf.withShadow = card.shadow
       })

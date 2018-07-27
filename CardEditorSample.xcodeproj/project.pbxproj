@@ -59,6 +59,7 @@
 		C7B7006120CA8FCE00F3B19B /* CardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfo.swift; sourceTree = "<group>"; };
 		C7B7006720CAE5F600F3B19B /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		C7B7006920CAE87D00F3B19B /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		C7EE513D210949550011E340 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = MyPlayground.playground; path = ../MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D997DD20E8DEEDA70F5848AA /* Pods_CardEditorSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardEditorSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -97,6 +98,7 @@
 		C7B7002F20CA899200F3B19B = {
 			isa = PBXGroup;
 			children = (
+				C7EE513D210949550011E340 /* MyPlayground.playground */,
 				C7B7003A20CA899200F3B19B /* CardEditorSample */,
 				C7B7003920CA899200F3B19B /* Products */,
 				73F918BA61093DAEA61BC5F9 /* Pods */,

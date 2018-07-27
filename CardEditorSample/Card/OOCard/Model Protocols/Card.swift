@@ -9,6 +9,7 @@
 import CoreGraphics
 
 protocol Card {
+  var roundedCorners: (topLeft: Bool, topRight: Bool, bottomLeft: Bool, bottomRight: Bool)? { get set }
   var radius: CGFloat { get set }
   var shadow: Bool { get set }
   var size: CGSize { get set }

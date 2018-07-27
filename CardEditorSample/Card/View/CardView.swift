@@ -16,6 +16,7 @@ class CardView: UIView {
   @IBOutlet weak var coverImage: UIImageView!
   @IBOutlet weak var iconImage: UIImageView!
   @IBOutlet weak var backView: UIView!
+  @IBOutlet weak var contentView: UIView!
   
   @IBOutlet weak var title: UITextField!
   @IBOutlet weak var year: UITextField!
@@ -64,12 +65,7 @@ extension CardView: CardViewProtocol {
       iconImage
     ]
   }
-  var fullCardViews: [UIView] {
-    return [
-      coverImage,
-      backView
-    ]
-  }
+
   var textFields: [UITextField] {
     return [
       title,
